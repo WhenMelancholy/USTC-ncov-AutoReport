@@ -80,17 +80,22 @@ class Report(object):
         return flag
 
     def login(self):
-        url = "https://passport.ustc.edu.cn/login?service=http%3A%2F%2Fweixine.ustc.edu.cn%2F2020%2Fcaslogin"
+        url = "https://passport.ustc.edu.cn/login?service=https%3A%2F%2Fweixine.ustc.edu.cn%2F2020%2Fcaslogin"
         data = {
             'model': 'uplogin.jsp',
             'service': 'https://weixine.ustc.edu.cn/2020/caslogin',
-            'username': self.stuid,
+            'username': str(self.stuid),
             'password': str(self.password),
+            'warn': '',
+            'showCode': '',
+            'button': '',
         }
         session = requests.Session()
-        session.post(url, data=data)
+        res = session.post(url, data=data)
 
         print("login...")
+        # print(res, res.headers, session.cookies)
+        # time.sleep(10)
         return session
 
 
